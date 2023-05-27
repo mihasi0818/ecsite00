@@ -1,6 +1,7 @@
 default: &default
   adapter: postgresql
   encoding: unicode
+  database: "<%= ENV.fetch("POSTGRES_DB") { "ecsite00" } %>"
   host: db
   username: postgres
   password: password
@@ -8,8 +9,12 @@ default: &default
 
 development:
   <<: *default
-  database: myapp_development
+ database: <%= ENV.fetch("POSTGRES_DB") { "ecsite00" } %>_development
 
 test:
   <<: *default
-  database: myapp_test
+ database: <%= ENV.fetch("POSTGRES_DB") { "ecsite00" } %>_test
+
+production:
+ <<: *default
+ database: <%= ENV.fetch("POSTGRES_DB") { "ecsite00" } %>_production
